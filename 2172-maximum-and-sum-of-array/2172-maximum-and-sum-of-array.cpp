@@ -16,14 +16,15 @@ public:
             
             if(((1<<i)&first)==0){
                 
-                ans=max(ans,((i+1)&vec[idx])+recurse(vec,idx+1,first^(1<<i),second,numSlots,dp));
-                
+                first^=(1<<i);
+    ans=max(ans,((i+1)&vec[idx])+recurse(vec,idx+1,first,second,numSlots,dp));
+                first^=(1<<i);
                 
             }
             else if(((1<<i)&second)==0){
-                 
-                ans=max(ans,((i+1)&vec[idx])+recurse(vec,idx+1,first,second^(1<<i),numSlots,dp));
-                
+                 second^=(1<<i);
+    ans=max(ans,((i+1)&vec[idx])+recurse(vec,idx+1,first,second,numSlots,dp));
+                second^=(1<<i);
             }
         }
         
