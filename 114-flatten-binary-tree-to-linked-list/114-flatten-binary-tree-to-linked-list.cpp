@@ -26,16 +26,20 @@ public:
             tail=tail->right;
         }
         
+        if(tail==NULL){
+            return root;
+        }
+        
+        
         root->left=NULL;
-        
         root->right=left;
-        if(tail!=NULL)
         tail->right=right;
-        else
-            root->right=right;
-        
         
         return root;
+        
+      
+        
+        
         
         
         
