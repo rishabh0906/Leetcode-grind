@@ -10,7 +10,29 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+    
+    ListNode *findMid(ListNode *head){
+        
+        if(head==NULL||head->next==NULL) 
+            return head;
+    
+        ListNode *slow=head;
+        ListNode *fast=head;
+        
+        while(slow!=NULL&&fast->next!=NULL&&fast->next->next!=NULL){
+            
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        
+        ListNode *node=slow->next;
+        slow->next=NULL;
+        
+        return node;
+        
+    }
+    
+    ListNode* merge(ListNode* list1, ListNode* list2) {
         
         if(list1==NULL)
             return list2;
@@ -55,5 +77,44 @@ public:
         }
         
         return dummy->next;
+    }
+    
+    ListNode* MergeSort(ListNode *head){
+        
+        if(head==NULL||head->next==NULL){
+            return head;
+        }
+        
+        ListNode* mid=findMid(head);
+        
+        ListNode* left=MergeSort(head);
+        ListNode* right=MergeSort(mid);
+        
+        return merge(left,right);
+    }
+    
+          
+    
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        
+            if(list1==NULL)
+            return list2;
+        
+        if(list2==NULL)
+            return list1;
+        
+        ListNode *curr=list1;
+        
+        while(curr->next!=NULL){
+            
+            curr=curr->next;
+        }
+        
+        curr->next=list2;
+        
+       return MergeSort(list1);
+        
+        
+       
     }
 };
